@@ -1,0 +1,38 @@
+﻿<Application x:Class="DockPanel.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DockPanel"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+
+            <!--TextBlock style -->
+            <Style x:Key="TextBlockStyle">
+                <Setter Property="TextBlock.Margin" Value="5,0,0,0"/>
+                <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                <Setter Property="TextBlock.FontSize" Value="18"/>
+            </Style>
+            
+            <!--TextBox Style-->
+            <Style x:Key="TextBoxStyle">
+                <Setter Property="TextBox.Margin" Value="5,0,0,0"/>
+                <Setter Property="TextBox.Width" Value="150"/>
+                <Setter Property="TextBox.Height" Value="30"/>
+                <Setter Property="TextBox.HorizontalAlignment" Value="Left"/>
+            </Style>
+
+
+
+        </ResourceDictionary>
+        
+
+        
+        
+         
+    </Application.Resources>
+</Application>

@@ -1,0 +1,80 @@
+﻿<Window x:Class="DockPanel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DockPanel"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d" Height="600" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Visibility="Visible" Foreground="White" Background="DarkGray" WindowStyle="None">
+    
+    
+    
+    <Window.Resources>
+        <Storyboard x:Key="MenuOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="70"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="250"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MenuClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="250"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="70"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <!--Main frame-->
+    <Grid>
+        <Frame x:Name="mainFrame" Width="1010" Margin="70,60,0,0" NavigationUIVisibility="Hidden"/>
+        <Grid Height="60" VerticalAlignment="Top" Background="#FF12678F">
+            <TextBlock Text="IT-Support Tool" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+            <materialDesign:PopupBox Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <StackPanel>
+                        <Button Content="About"/>
+                        <Separator/>
+                        <Button x:Name="ButtonPopUpExit" Content="Exit" Click="ButtonPopUpExit_Click"/>
+                </StackPanel>
+                </materialDesign:PopupBox>
+
+       <!--Navigation bar-->     
+        </Grid>
+        <Grid x:Name="GridMenu" Width="70" HorizontalAlignment="Left" Background="DarkBlue">
+            <StackPanel>
+                <Grid Height="150" Background="White">
+                    <Button x:Name="ButtonOpenMenu" Width="60" Height="60" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonOpenMenu_Click">
+                        <materialDesign:PackIcon Kind="Menu" Foreground="Tomato" Width="25" Height="25"/>
+                    </Button>
+                    <Button x:Name="ButtonCloseMenu" Width="60" Height="60" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed" Click="ButtonCloseMenu_Click">
+                        <materialDesign:PackIcon Kind="ArrowLeft" Foreground="Tomato" Width="25" Height="25" />
+                    </Button>
+                </Grid>
+                <ListView ScrollViewer.HorizontalScrollBarVisibility = "Disabled" Foreground="Beige">
+                    <ListViewItem Height="60" MouseDown="IconClickComputerInfo">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ComputerClassic" Width="25" Height="25" VerticalAlignment="Center" Margin="10" MouseDown="IconClickComputerInfo"/>
+                            <Button Content="Computer information" VerticalAlignment="Center" Margin="20,10" Click="BtnClickComputerInfo"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="User" Width="25" Height="25" VerticalAlignment="Center" Margin="10"/>
+                            <Button Content="User information" VerticalAlignment="Center" Margin="20,10" Click="Button_Click" />
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+            
+        </Grid>
+        
+    </Grid>
+</Window>
