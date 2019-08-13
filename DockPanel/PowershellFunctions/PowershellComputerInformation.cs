@@ -1,31 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Management.Automation;
+using System.Collections;
 
 namespace DockPanel.PowershellFunctions
 {
-    class PowershellComputerInformation
+    static class PowershellComputerInformation
     {
 
-        public string GetComputerObject(string computer, string computerProperty)
+        public static string GetComputerObject(string computer, string computerProperty)
         {
+
+            IDictionary parameters = new Dictionary<string, string>();
+            parameters.Add("ClassName", "CIM_ComputerSystem");
+            parameters.Add("ComputerName", computer);
+            parameters.Add("Property", "*");
+
+
             PowerShell CIM_ComputerSystem = PowerShell.Create()
                 .AddCommand("Get-CimInstance")
-                .AddParameter("ClassName", "CIM_ComputerSystem")
-                .AddParameter("ComputerName",computer);
-            PowerShell Win32_LogicalDisk = PowerShell.Create()
+                .AddParameters(parameters);
+            /*PowerShell Win32_LogicalDisk = PowerShell.Create()
                 .AddCommand("Get-CimInstance")
                 .AddParameter("ComputerName", computer)
-                .AddParameter("ClassName", "Win32_LogicalDisk");
+                .AddParameter("ClassName", "Win32_LogicalDisk");*/
                 
 
-
+            // GIT TEST
 
             IAsyncResult asyncCIM_ComputerSystem = CIM_ComputerSystem.BeginInvoke();
-            IAsyncResult asyncWin32_LogicalDisk = Win32_LogicalDisk.BeginInvoke();
+            //IAsyncResult asyncWin32_LogicalDisk = Win32_LogicalDisk.BeginInvoke();
 
 
             foreach (PSObject item in CIM_ComputerSystem.EndInvoke(asyncCIM_ComputerSystem))
@@ -35,34 +40,6 @@ namespace DockPanel.PowershellFunctions
 
 
             return computer; 
-        }
-
-        public string GetComputerName(string computer)
-        {
-            /*PowerShell ps = PowerShell.Create()
-                .AddCommand("Get-CimInstance")
-                .AddParameter("ClassName", "CIM_ComputerSystem")
-                .AddParameter("ComputerName",computer);
-
-            IAsyncResult async = ps.BeginInvoke();
-
-            
-            foreach (PSObject result in ps.EndInvoke(async))
-            {
-                  computer = result.Members["Name"].Value.ToString();
-            }
-
-            return computer;
-        */
-
-            PowerShell ps = PowerShell.Create()
-                .AddCommand("Get-CimInstance")
-                .AddParameter("ClassName", "CIM_ComputerSystem")
-                .AddParameter("ComputerName", computer);
-
-
-            PSObject result = ps.Invoke().First();
-            return result.Members["Name"].Value.ToString();
         }
 
     }

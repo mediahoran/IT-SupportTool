@@ -42,7 +42,7 @@ namespace DockPanel
             }*/
 
 
-            PowershellComputerInformation ps1 = new PowershellComputerInformation();
+            //PowershellComputerInformation ps1 = new PowershellComputerInformation();
 
             // The computers hostname
             //TextComputerName.Text = ps1.GetComputerName(TextComputerInfo.Text);
@@ -50,10 +50,12 @@ namespace DockPanel
             // All the information about the whole computer object
             //TextComputerName.Text = ps1.GetComputerObject(TextComputerInfo.Text);
 
-            TextComputerName.Text = ps1.GetComputerObject(TextComputerInfo.Text, "Name");
-            TextModel.Text = ps1.GetComputerObject(TextComputerInfo.Text, "Model");
-            TextManufacturer.Text = ps1.GetComputerObject(TextComputerInfo.Text, "Manufacturer");
-            TextComputerType.Text = ps1.GetComputerObject(TextComputerInfo.Text, "ChassisSKUNumber");
+            TextComputerName.Text = PowershellComputerInformation.GetComputerObject(TextComputerInfo.Text, "Name");
+            TextModel.Text = PowershellComputerInformation.GetComputerObject(TextComputerInfo.Text, "Model");
+            TextManufacturer.Text = PowershellComputerInformation.GetComputerObject(TextComputerInfo.Text, "Manufacturer");
+            TextComputerType.Text = PowershellComputerInformation.GetComputerObject(TextComputerInfo.Text, "ChassisSKUNumber");
+            TextUser.Text = PowershellComputerInformation.GetComputerObject(TextComputerInfo.Text, "UserName");
+            //TextInstalldate.Text = ps1.GetComputerObject(TextComputerInfo.Text, "InstallDate");
 
 
 
